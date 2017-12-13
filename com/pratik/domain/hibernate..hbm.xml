@@ -1,0 +1,25 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!--  Super Class Properties-->
+	<class name="com.pratik.domain.Insurance" table="MyInsurance" discriminator-value="policy">
+		<id	name="id" column="ID" type="int" >
+			<generator class="increment"></generator>
+		</id>
+		<discriminator column="Type" type="string"/>
+		<property name="name" column="Name" type="string" length="15"/>
+		<property name="company" column="Company" type="string" length="10"/>
+			<!--  Sub Class Properties-->
+			<subclass name="com.pratik.domain.LifeInsurance" discriminator-value="life">
+					<property name="policy_name" column="PolicyName" type="string" length="15" not-null="false"/>
+					
+			</subclass>
+				<!--  Sub class Properties-->
+				<subclass name="com.pratik.domain.VehicleInsurance" discriminator-value="vehicle">
+					<property name="vehType" column="Vehicle" type="string" length="15" not-null="false"/>
+					
+				</subclass>
+	</class>
+</hibernate-mapping>
